@@ -1,0 +1,22 @@
+conda create -n py27 python=2.7
+conda activate py27
+
+
+
+conda search --full --name tensorflow-gpu
+conda install tensorflow=1.15.0 # no nvidia gpu
+conda install tensorflow-gpu=1.15.0 # with nvidia gpu and driver
+conda install -y opencv 
+conda install -y pillow 
+conda install -y scikit-image
+replace path in test.csv
+
+conda remove -n py27gpu --all
+
+pip uninstall numpy 
+pip install numpy==1.16.4
+conda install scipy==1.2.0
+
+gpu
+
+tf_upgrade_v2 --intree src/ --outtree src_v2/ --reportfile report.txt
