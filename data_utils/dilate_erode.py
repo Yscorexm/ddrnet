@@ -95,6 +95,7 @@ if __name__ == '__main__':
                 mask = get_mask(depth_im_de, gt_im)
             depth.save_image(osp.join('..', 'depth_filled', i), depth_im_de)
             depth.save_image(osp.join('..', 'mask', i), mask)
-            print("%s time:%f"%(i, time.time()-start))
+            print "%s time:%f"%(i, time.time()-start)
+            # print("%s time:%f"%(i, time.time()-start))
 
 

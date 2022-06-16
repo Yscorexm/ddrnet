@@ -71,7 +71,7 @@ def convResnet(x, is_training, aux=None, reuse=None, scope='dn_net', ngf=32, n_b
                 mult = mult // 2
                 cnv = tf.concat([scale_skips[-1], cnv], cat_axis, name='cat{}'.format(i + 1))
                 scale_skips.pop()
-                cnv = slim.conv2d_transpose(cnv, ngf * mult, [3, 3], stride=2, scope=f'cnv_up{i}')
+                cnv = slim.conv2d_transpose(cnv, ngf * mult, [3, 3], stride=2, scope='cnv_up{}'.format(i))
 
             cnv = tf.concat([scale_skips[0], cnv], cat_axis, name='cat_final')
             assert len(scale_skips) == 1
