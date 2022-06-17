@@ -20,3 +20,6 @@ conda install scipy==1.2.0
 gpu
 
 tf_upgrade_v2 --intree src/ --outtree src_v2/ --reportfile report.txt
+
+ssh stu1563@sylogin.hpc.sjtu.edu.cn
+&D2%XPTs
