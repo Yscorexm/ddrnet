@@ -1,0 +1,11 @@
+evaluating csv file: ../dataset/zyh2/test.csv
+Traceback (most recent call last):
+  File "evaluate.py", line 305, in <module>
+    main(config)
+  File "evaluate.py", line 300, in main
+    loop(data_info, config, split_stack=False)
+  File "evaluate.py", line 225, in loop
+    mask = Image.open(mask_path)
+  File "C:\Users\11868\miniconda3\envs\low\lib\site-packages\PIL\Image.py", line 2968, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '../dataset/zyh2/group1/mask/pose_0.png'

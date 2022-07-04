@@ -263,7 +263,7 @@ def loop(data_info, config, split_stack=True, test_time=True):
         tt_time = 0.0
         history_len = 3
         t_history = np.zeros(history_len, dtype=np.float32)
-        for i, (name, raw, _, rgb, mask) in enumerate(all_ims):
+        for i, (name, raw, _, rgb, mask) in enumerate(all_ims): # not using high quality depth in evaluating
             t_elapsed = loop_body_patch_time(sess, name, params, raw, rgb, mask, config)
             t_history[i % history_len] = t_elapsed
             tt_time += t_elapsed

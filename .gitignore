@@ -151,3 +151,10 @@ ENV/
 
 # checkpoint file
 *.pth
+
+
+download/
+*pptx
+sample/
+log/
+dataset/face

@@ -10,7 +10,7 @@ mkdir -p $logdir
 touch $logfile
 
 cd src
-CUDA_VISIBLE_DEVICES=$2 python train.py \
+CUDA_VISIBLE_DEVICES=0 python train.py \
     --index_file=../dataset/train.csv \
     --rand_crop \
     --rand_flip \

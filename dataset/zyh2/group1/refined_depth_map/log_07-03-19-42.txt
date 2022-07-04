@@ -1,0 +1,83 @@
+2022-07-03 19:42:24.303055: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+evaluating csv file: ../dataset/zyh2/test.csv
+Load checkpoint: ../download/split/./split-6000
+saving img pose_0.png.
+1648 0
+1573 0
+iter 1 | tt_time: 0.6510s; avg_time: 651.00; mv_avg_time: 217.00
+saving img pose_1.png.
+1654 0
+1577 0
+iter 2 | tt_time: 1.2870s; avg_time: 643.50; mv_avg_time: 429.00
+saving img pose_2.png.
+1627 0
+1583 0
+iter 3 | tt_time: 1.9210s; avg_time: 640.33; mv_avg_time: 640.33
+saving img pose_3.png.
+1622 0
+1581 0
+iter 4 | tt_time: 2.5420s; avg_time: 635.50; mv_avg_time: 630.34
+saving img pose_4.png.
+1685 0
+1583 0
+iter 5 | tt_time: 3.1650s; avg_time: 633.00; mv_avg_time: 626.00
+saving img pose_5.png.
+1629 0
+1582 0
+iter 6 | tt_time: 3.7860s; avg_time: 631.00; mv_avg_time: 621.67
+saving img pose_6.png.
+1610 0
+1578 0
+iter 7 | tt_time: 4.4120s; avg_time: 630.29; mv_avg_time: 623.33
+saving img pose_7.png.
+1637 0
+1584 0
+iter 8 | tt_time: 5.0440s; avg_time: 630.50; mv_avg_time: 626.33
+saving img pose_8.png.
+1712 0
+1580 0
+iter 9 | tt_time: 5.6800s; avg_time: 631.11; mv_avg_time: 631.34
+saving img pose_9.png.
+1613 0
+1590 0
+iter 10 | tt_time: 6.3130s; avg_time: 631.30; mv_avg_time: 633.67
+saving img pose_10.png.
+1681 0
+1584 0
+iter 11 | tt_time: 6.9390s; avg_time: 630.82; mv_avg_time: 631.67
+saving img pose_11.png.
+1650 0
+1583 0
+iter 12 | tt_time: 7.6530s; avg_time: 637.75; mv_avg_time: 657.66
+saving img pose_12.png.
+1623 0
+1584 0
+iter 13 | tt_time: 8.3240s; avg_time: 640.31; mv_avg_time: 670.33
+saving img pose_13.png.
+1619 0
+1583 0
+iter 14 | tt_time: 8.9530s; avg_time: 639.50; mv_avg_time: 671.33
+saving img pose_14.png.
+1616 0
+1584 0
+iter 15 | tt_time: 9.5760s; avg_time: 638.40; mv_avg_time: 641.00
+saving img pose_15.png.
+1650 0
+1586 0
+iter 16 | tt_time: 10.2030s; avg_time: 637.69; mv_avg_time: 626.33
+saving img pose_16.png.
+1608 0
+1583 0
+iter 17 | tt_time: 10.8250s; avg_time: 636.76; mv_avg_time: 624.00
+saving img pose_17.png.
+1637 0
+1583 0
+iter 18 | tt_time: 11.4510s; avg_time: 636.17; mv_avg_time: 625.00
+saving img pose_18.png.
+1605 0
+1582 0
+iter 19 | tt_time: 12.0710s; avg_time: 635.32; mv_avg_time: 622.67
+saving img pose_19.png.
+1643 0
+1587 0
+iter 20 | tt_time: 12.7030s; avg_time: 635.15; mv_avg_time: 626.00

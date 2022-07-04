@@ -1,0 +1,11 @@
+2022-06-28 16:20:45.309303: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+evaluating csv file: ../dataset/zyh2/test.csv
+Load checkpoint: ../download/split/./split-6000
+saving img pose_1.png.
+1628 0
+1597 0
+iter 1 | tt_time: 0.6202s; avg_time: 620.15; mv_avg_time: 206.72
+saving img pose_2.png.
+1627 0
+1587 0
+iter 2 | tt_time: 1.1822s; avg_time: 591.08; mv_avg_time: 394.06

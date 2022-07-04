@@ -22,4 +22,9 @@ gpu
 tf_upgrade_v2 --intree src/ --outtree src_v2/ --reportfile report.txt
 
 ssh stu1563@sylogin.hpc.sjtu.edu.cn
+ssh stu1563@login.hpc.sjtu.edu.cn
 &D2%XPTs
+
+
+scp -r stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/log/test/ download/
+change checkpoint

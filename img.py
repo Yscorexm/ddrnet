@@ -4,8 +4,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-img_path = ['dataset/20170907/group1/high_quality_depth/frame_000001.png', 'dataset/20170907/group1/depth_map/frame_000001.png',
-            'sample/dt_frame_000001.png', 'sample_my/dt_frame_000001.png']
+img_path = ['dataset/20170907/group2/high_quality_depth/frame_000001.png', 'dataset/20170907/group2/depth_map/frame_000001.png',
+            'sample/dt_frame_000001.png']
 mins = maxx = -1
 for k, p in enumerate(img_path):
     img = Image.open(p)
@@ -34,4 +34,4 @@ for k, p in enumerate(img_path):
     plt.imshow(img_show)
 
 # plt.show()
-plt.savefig('output_my.jpg')
+plt.savefig('output_train.jpg')

@@ -220,7 +220,7 @@ class Trainer(object):
             self.summaries.append(tf.summary.scalar("total_loss", loss))
             for ls in tf.get_collection(LOSSES_COLLECTION):
                 ls_name = ls.name.split('/')[0]
-                # print('Losses: ' + ls_name)
+                print('Losses: ' + ls_name)
                 self.summaries.append(tf.summary.scalar(ls_name, ls))
 
 
@@ -252,7 +252,7 @@ class Trainer(object):
 
                 eta = (t2 - t1) * (config.max_steps - step + 1)
                 print("Finished {}/{} steps, ETA:{:.2f} seconds".format(step, config.max_steps, eta))
-                utils.flush_stdout()
+                # utils.flush_stdout()
 
             if step % config.save_model_steps == 0:
                 self.saver.save(self.sess, os.path.join(config.logdir,
