@@ -235,7 +235,7 @@ class Trainer(object):
 
         for step in range(start_step, config.max_steps):
             t1 = time.time()
-
+            print('yes')
             # # dbg filter condition.
             # diff = self.sess.run(self.diff)
             # if diff < config.diff_thres: logging.debug(diff)

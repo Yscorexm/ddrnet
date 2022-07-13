@@ -27,4 +27,7 @@ ssh stu1563@login.hpc.sjtu.edu.cn
 
 
 scp -r stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/log/test/ download/
+scp -r dataset/face/ stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/dataset/face/
+scp dataset/face.tar.gz stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/dataset/
+
 change checkpoint

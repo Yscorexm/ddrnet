@@ -8,10 +8,11 @@ time=`date +"%m-%d-%H-%M"`
 logfile=${logdir}/log_$time.txt
 mkdir -p $logdir
 touch $logfile
+# ../dataset/face/train_small.csv
 
 cd src
 CUDA_VISIBLE_DEVICES=0 python train.py \
-    --index_file=../dataset/train.csv \
+    --index_file=../dataset/face/train_small.csv \
     --rand_crop \
     --rand_flip \
     --rand_depth_shift \
