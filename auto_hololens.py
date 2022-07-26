@@ -180,7 +180,7 @@ for folder in folders:
             '--dtnet=hypercolumn', 
             f'--sample_dir=../{output_dir}',
             f'--checkpoint_dir={checkpoint_dir}',
-            f'--csv_path=../{test_csv_path}',
+            f'--csv_path=../{csv_path}',
             f'--low_thres=1000',
             f'--up_thres=2200',
             f'--image_size={crop_size}'
