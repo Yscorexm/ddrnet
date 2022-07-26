@@ -169,23 +169,23 @@ for folder in folders:
     checkpoint_dir = '../download/stop/'
     # checkpoint_dir = '../log/cscd/noBN_L1_sd100_B16/'
 
-    # if not os.path.exists(output_dir):
-    #     os.mkdir(output_dir)
-    # os.chdir('src')
-    # with open(f'../{output_time_dir}/{k}', 'w') as file_out:
-    #     subprocess.run([
-    #         'python', 
-    #         'evaluate.py', 
-    #         '--dnnet=convResnet', 
-    #         '--dtnet=hypercolumn', 
-    #         f'--sample_dir=../{output_dir}',
-    #         f'--checkpoint_dir={checkpoint_dir}',
-    #         f'--csv_path=../{train_csv_path}',
-    #         f'--low_thres=1000',
-    #         f'--up_thres=2200',
-    #         f'--image_size={crop_size}'
-    #         ], shell=True, stdout=file_out)
-    # os.chdir('..')
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+    os.chdir('src')
+    with open(f'../{output_time_dir}/{k}', 'w') as file_out:
+        subprocess.run([
+            'python', 
+            'evaluate.py', 
+            '--dnnet=convResnet', 
+            '--dtnet=hypercolumn', 
+            f'--sample_dir=../{output_dir}',
+            f'--checkpoint_dir={checkpoint_dir}',
+            f'--csv_path=../{test_csv_path}',
+            f'--low_thres=1000',
+            f'--up_thres=2200',
+            f'--image_size={crop_size}'
+            ], shell=True, stdout=file_out)
+    os.chdir('..')
 
     # Show result gif
     for filename in filenames:
