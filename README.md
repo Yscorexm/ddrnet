@@ -95,3 +95,9 @@ If you find DDRNet useful in your research, please consider citing:
 Code has been tested under:
 - Ubuntu 16.04 with 3 Maxwell Titan X GPU and Intel i7-6900K CPU @ 3.20GHz
 - Ubuntu 14.04 with a GTX 1070 GPU and Intel Xeon CPU E3-1231 v3 @ 3.40GHz
+
+### Train and Test on HoloLens 2 dataset
+Please download the dataset and pretrained model of HoloLens 2 from [Google Drive](https://drive.google.com/drive/folders/1Golrg7ORnJN4RaSimMIiJaRkiZEZCYTC?usp=sharing). Then unzip `hololens_all.zip` to path `dataset/hololens_all` and unzip `stop.zip` to path `download/stop/`. Run script auto_hololens.py to see the test output.
+    ```
+    python3 auto_hololens.py
+    ```
