@@ -12,14 +12,15 @@ touch $logfile
 
 cd src
 CUDA_VISIBLE_DEVICES=0 python train.py \
-    --index_file=../dataset/face/train_small.csv \
+    --index_file=../dataset/hololens_all/group1/train_1_0_5.csv \
     --rand_crop \
     --rand_flip \
     --rand_depth_shift \
+    --dnstop \
     --aux_type='PNG' \
     --diff_thres=2.5 \
-    --low_thres=500 \
-    --up_thres=3000 \
+    --low_thres=1000 \
+    --up_thres=2200 \
     --dnnet=convResnet \
     --dtnet=hypercolumn \
     --checkpoint_basename=$expm \

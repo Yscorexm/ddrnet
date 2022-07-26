@@ -46,25 +46,26 @@ def compute_normal(depth, mask):
     gray_img = np.where(mask == 1, gray_img, 255)
     return gray_img
 
-def show_result(dir, origin, x):
-    # path = 'dataset/face/Tester_1/depth_map/pose_0.png'
-    filename = 'frame_000001.png' if origin else f'pose_{x}.png'
+def show_result(dir, filename, crop_size=400, cut_half=False):
+    cut_pos = 138
     color_path = f'{dir}/color_map/{filename}'
-    depth_path = f'{dir}/depth_map/{filename}'
+    depth_path = f'{dir}/raw_depth_map/{filename}'
     # depth_path = f'{dir}/high_quality_depth/{filename}'
     dn_path = f'{dir}/refined_depth_map/dn_{filename}'
     dt_path = f'{dir}/refined_depth_map/dt_{filename}'
     mask_path = f'{dir}/mask/{filename}'
     paths = [depth_path, dn_path, dt_path]
-    mask = center_crop(np.array(Image.open(mask_path))).astype('uint8')
+    mask = center_crop(np.array(Image.open(mask_path)), patch_size=crop_size).astype('uint8')
     mask //= 255
 
     title = ['Raw Depth', 'Denoised Depth', 'Refined Depth']
     fig, ax = plt.subplots(1, 4)
-    fig.set_figheight(4.5)
+    fig.set_figheight(4.5 if not cut_half else 2.5)
     fig.set_figwidth(17)
     color = np.array(Image.open(color_path))
-    color = center_crop(color)
+    color = center_crop(color, patch_size=crop_size)
+    if cut_half:
+        color = color[:cut_pos]
     ax[0].imshow(color)
     ax[0].set_title("Color Image", fontsize=25)
     ax[0].axis('off')
@@ -72,13 +73,15 @@ def show_result(dir, origin, x):
     for k, p in enumerate(paths):
         depth = np.array(Image.open(p))
         if mask.shape[0] < min(depth.shape):
-            depth = center_crop(depth)
+            depth = center_crop(depth, patch_size=crop_size)
         gray_img = compute_normal(depth, mask)
+        if cut_half:
+            gray_img = gray_img[:cut_pos]
         ax[k + 1].set_title(title[k], fontsize=25)
         ax[k + 1].imshow(gray_img, cmap='gray', vmin=0, vmax=255)
         ax[k + 1].axis('off')
     fig.tight_layout(rect=[0, 0, 1, 0.93])
-    mp = True
+    mp = False
     img_dir = f'{dir}/origin_normal' if mp else f'{dir}/normal'
     if not os.path.exists(img_dir):
         os.mkdir(img_dir)

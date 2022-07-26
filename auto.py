@@ -9,20 +9,22 @@ import cv2
 import depth2mesh
 from depth2normal import show_result
 
-def depth_process(src, dst, fn):
+def depth_process(src, dst, fn, mask_dir=None):
     files = glob.glob(f'{src}/*')
     for img_path in files:
-        filename = img_path.split('\\')[1]
-        img_path = files[0]
+        filename = img_path.split('\\')[-1]
         img = np.array(Image.open(img_path))
-        processed = np.where(img > 0, fn(img), np.zeros_like(img))
+        if mask_dir:
+            mask = np.array(Image.open(f'{mask_dir}/{filename}'))
+            img = img * mask // 255
+        processed = np.where(img > 0, fn(img), np.zeros_like(img)).astype('uint16')
         # if '2' in filename:
         #     plt.imshow(processed)
         #     plt.show()
-        cv2.imwrite(f'{dst}/{filename}', processed)
+        save_im = Image.fromarray(processed)
+        save_im.save(f'{dst}/{filename}')
 
-def img_show(dir, origin, x):
-    filename = 'frame_000001.png' if origin else f'pose_{x}.png'
+def img_show(dir, filename):
     color_path = f'{dir}/color_map/{filename}'
     depth_path = f'{dir}/depth_map/{filename}'
     high_path = f'{dir}/high_quality_depth/{filename}'
@@ -43,7 +45,7 @@ def img_show(dir, origin, x):
         ax[i1, i2].set_title(title[k])
         ax[i1, i2].imshow(img_show)
     fig.tight_layout()
-    mp = True
+    mp = False
     img_dir = f'{dir}/origin_img' if mp else f'{dir}/img'
     if not os.path.exists(img_dir):
         os.mkdir(img_dir)
@@ -61,75 +63,78 @@ def get_model(dir, origin, x):
     for dp, name in zip([depth_path, high_path, output_path], ['depth', 'high_depth', 'output']):
         depth2mesh.create_obj(depthPath=dp, objPath=f'{model_dir}/{name}.obj', mtlPath='', matName='', useMaterial=False)
 
+if __name__ == '__main__':
 
-base_dir = 'dataset/face'
-# Generate train.csv
-# train_csv_path = f'{base_dir}/train.csv'
-# csv_contents = []
-# for k in range(1, 121):
-#     # Generate csv files
-#     test_dir = f'{base_dir}/Tester_{k}'
-#     csv_base_dir = f'../{test_dir}'
-#     dir_names = ['depth_map', 'high_quality_depth', 'color_map', 'mask']
-#     for i in range(20):
-#         csv_contents.append(','.join(f'{csv_base_dir}/{name}/pose_{i}.png' for name in dir_names) + '\n')
-# with open(train_csv_path, 'w') as fw:
-#     fw.writelines(csv_contents)
+    base_dir = 'dataset/face'
+    # Generate train.csv
+    # train_csv_path = f'{base_dir}/train10.csv'
+    # csv_contents = []
+    # for k in range(1, 11):
+    #     # Generate csv files
+    #     test_dir = f'{base_dir}/Tester_{k}'
+    #     csv_base_dir = f'../{test_dir}'
+    #     dir_names = ['depth_map', 'high_quality_depth', 'color_map', 'mask']
+    #     for i in range(20):
+    #         csv_contents.append(','.join(f'{csv_base_dir}/{name}/pose_{i}.png' for name in dir_names) + '\n')
+    # with open(train_csv_path, 'w') as fw:
+    #     fw.writelines(csv_contents)
 
-first = [1, 67, 68, 69, 70]
+    first = [1, 67, 68, 69, 70]
+    two = [144, 145, 146, 147]
 
-for k in [144, 145, 146, 147]:
-    # Generate csv files
-    test_dir = f'{base_dir}/Tester_{k}'
-    csv_path = f'{test_dir}/test_{k}.csv'
-    csv_contents = []
-    csv_base_dir = f'../{test_dir}'
-    dir_names = ['depth_map', 'high_quality_depth', 'color_map', 'mask']
-    for i in range(20):
-        csv_contents.append(','.join(f'{csv_base_dir}/{name}/pose_{i}.png' for name in dir_names) + '\n')
-    with open(csv_path, 'w') as fw:
-        fw.writelines(csv_contents)
-    
-    # Generate depth map that fit DDRNet
-    depth_folders = [f'{test_dir}/{name}' for name in dir_names[:2]]
-    raw_depth_folders = [f'{test_dir}/raw_{name}' for name in dir_names[:2]]
-    if not os.path.exists(raw_depth_folders[0]):
-        for i in range(2):
-            src, dst = depth_folders[i], raw_depth_folders[i]
-            os.rename(src, dst)
-            os.mkdir(src)
+    for k in [1]:
+        # Generate csv files
+        test_dir = f'{base_dir}/Tester_{k}'
+        csv_path = f'{test_dir}/test_{k}.csv'
+        csv_contents = []
+        csv_base_dir = f'../{test_dir}'
+        dir_names = ['depth_map', 'high_quality_depth', 'color_map', 'mask']
+        for i in range(20):
+            csv_contents.append(','.join(f'{csv_base_dir}/{name}/pose_{i}.png' for name in dir_names) + '\n')
+        with open(csv_path, 'w') as fw:
+            fw.writelines(csv_contents)
         
-    depth_process(raw_depth_folders[0], depth_folders[0], lambda img: (img - 1) * 4)
-    depth_process(raw_depth_folders[1], depth_folders[1], lambda img: img)
+        # Generate depth map that fit DDRNet
+        depth_folders = [f'{test_dir}/{name}' for name in dir_names[:2]]
+        raw_depth_folders = [f'{test_dir}/raw_{name}' for name in dir_names[:2]]
+        if not os.path.exists(raw_depth_folders[0]):
+            for i in range(2):
+                src, dst = depth_folders[i], raw_depth_folders[i]
+                os.rename(src, dst)
+                os.mkdir(src)
+            
+        depth_process(raw_depth_folders[0], depth_folders[0], lambda img: (img - 1) * 3)
+        depth_process(raw_depth_folders[1], depth_folders[1], lambda img: img)
 
-    origin = False
-    low = 0
-    up = 260
-    if origin:
-        test_dir = 'dataset/20170907/group2'
-        csv_path = 'dataset/test.csv'
-        low = 500
-        up = 3000
-    output_dir = f'{test_dir}/refined_depth_map'
-    # checkpoint_dir = '../download/split/'
-    checkpoint_dir = '../log/cscd/noBN_L1_sd100_B16/'
-    if not os.path.exists(output_dir):
-        os.mkdir(output_dir)
-    os.chdir('src')
-    subprocess.run([
-        'python', 
-        'evaluate.py', 
-        '--dnnet=convResnet', 
-        '--dtnet=hypercolumn', 
-        f'--sample_dir=../{output_dir}',
-        f'--checkpoint_dir={checkpoint_dir}',
-        f'--csv_path=../{csv_path}',
-        f'--low_thres={low}',
-        f'--up_thres={up}',
-        '--image_size=400'
-        ], shell=True)
-    os.chdir('..')
-    for i in range(20):
-        img_show(test_dir, origin, i)
-        show_result(test_dir, origin, i)
-    # get_model(test_dir, origin, k)
+        origin = False
+        low = 0
+        up = 255
+        if origin:
+            test_dir = 'dataset/20170907/group2'
+            csv_path = 'dataset/test.csv'
+            low = 500
+            up = 3000
+        output_dir = f'{test_dir}/refined_depth_map'
+        checkpoint_dir = '../download/split/'
+        # checkpoint_dir = '../download/face10/'
+        # checkpoint_dir = '../log/cscd/noBN_L1_sd100_B16/'
+        if not os.path.exists(output_dir):
+            os.mkdir(output_dir)
+        os.chdir('src')
+        subprocess.run([
+            'python', 
+            'evaluate.py', 
+            '--dnnet=convResnet', 
+            '--dtnet=hypercolumn', 
+            f'--sample_dir=../{output_dir}',
+            f'--checkpoint_dir={checkpoint_dir}',
+            f'--csv_path=../{csv_path}',
+            f'--low_thres={low}',
+            f'--up_thres={up}',
+            '--image_size=400'
+            ], shell=True)
+        os.chdir('..')
+        for i in range(20):
+            img_show(test_dir, f'pose_{i}.png')
+            show_result(test_dir, f'pose_{i}.png')
+        # get_model(test_dir, origin, k)

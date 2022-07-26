@@ -26,8 +26,8 @@ ssh stu1563@login.hpc.sjtu.edu.cn
 &D2%XPTs
 
 
-scp -r stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/log/test/ download/
-scp -r dataset/face/ stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/dataset/face/
-scp dataset/face.tar.gz stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/dataset/
+scp -r stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/log/stop/ download/
+scp -r dataset/hololens/ stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/dataset/hololens/
+scp dataset/hololens.zip stu1563@data.hpc.sjtu.edu.cn:/lustre/home/acct-stu/stu1563/ddrnet/dataset/
 
 change checkpoint
